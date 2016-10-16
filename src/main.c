@@ -12,6 +12,7 @@ void doRawData(void);
 void doDictionary(void);
 void writeByte(uint8_t value);
 uint8_t readByte(void);
+uint16_t readWord(void);
 
 uint8_t dictionary[0x400];
 int dictionary_index;
@@ -52,8 +53,8 @@ int main(int argc, char *argv[])
 	const int src_filesize = ftell(src_file);
 	rewind(src_file);
 
-	size_of_uncompressed_file = (readByte()<<8)|readByte();
-	const int end_of_file = ((readByte()<<8)|readByte()) + ftell(src_file);
+	size_of_uncompressed_file = readWord();
+	const int end_of_file = readWord() + ftell(src_file);
 
 	if (src_filesize > end_of_file+1)
 		printf("Warning: Compressed file is larger than expected (is 0x%X; expected 0x%X).\n", src_filesize,  end_of_file+1);
@@ -99,7 +100,7 @@ void doRawData(void)
 
 void doDictionary(void)
 {
-	uint16_t dictionary_entry = (readByte()<<8)|readByte();
+	uint16_t dictionary_entry = readWord();
 	const int length = (dictionary_entry&0xFC00)>>0xA;
 	int index = dictionary_entry&0x3FF;
 	#if DEBUG
@@ -140,4 +141,9 @@ uint8_t readByte(void)
 	}
 
 	return value;
+}
+
+uint16_t readWord(void)
+{
+	return (readByte()<<8)|readByte();
 }
