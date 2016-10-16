@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 	dictionary_index = 0x3C0;
 
 	fseek(src_file, 0, SEEK_END);
-	int src_filesize = ftell(src_file);
+	const int src_filesize = ftell(src_file);
 	rewind(src_file);
 
 	size_of_uncompressed_file = (readByte()<<8)|readByte();
