@@ -1,6 +1,7 @@
 // LZSS decompressor for Rocket Knight Adventures, made by Clownacy
 // License: I dunno, this was based on reverse-engineered code anyway
 
+#include <libgen.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
 {
 	if (argc <= 1)
 	{
-		printf("LZSS decompressor for Rocket Knight Adventures, made by Clownacy\n\nUsage: %s path_to_source path_to_destination\n", argv[0]);
+		printf("LZSS decompressor for Rocket Knight Adventures, made by Clownacy\n\nUsage: %s path_to_source path_to_destination\n", basename(argv[0]));
 		exit(EXIT_FAILURE);
 	}
 
