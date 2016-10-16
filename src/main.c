@@ -81,7 +81,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (ftell(dst_file) < size_of_uncompressed_file)
+	if (ftell(dst_file) > size_of_uncompressed_file)
+		printf("Warning: Decompressed file is larger than expected (is 0x%X; expected 0x%X).\n", ftell(dst_file),  size_of_uncompressed_file);
+	else if (ftell(dst_file) < size_of_uncompressed_file)
 		printf("Warning: Decompressed file is smaller than expected (is 0x%X; expected 0x%X).\n", ftell(dst_file),  size_of_uncompressed_file);
 
 	fclose(src_file);
@@ -120,14 +122,6 @@ void doDictionary(void)
 
 void writeByte(uint8_t value)
 {
-	// First, make sure we aren't murdering the user's hard drive
-	if (ftell(dst_file) >= size_of_uncompressed_file)
-	{
-		printf("Error: Decompressed file exceeded expected size. Input file might not be compressed.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// If not, actually send the value
 	fputc(value, dst_file);
 	dictionary[dictionary_index++] = value;
 	dictionary_index &= 0x3FF;
