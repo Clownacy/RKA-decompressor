@@ -56,13 +56,13 @@ int main(int argc, char *argv[])
 	size_of_uncompressed_file = readWord();
 	const int end_of_file = readWord() + ftell(src_file);
 
-	if (src_filesize > end_of_file+1)
-		printf("Warning: Compressed file is larger than expected (is 0x%X; expected 0x%X).\n", src_filesize,  end_of_file+1);
-	else if (src_filesize < end_of_file+1)
-		printf("Warning: Compressed file is smaller than expected (is 0x%X; expected 0x%X).\n", src_filesize,  end_of_file+1);
+	if (src_filesize > end_of_file)
+		printf("Warning: Compressed file is larger than expected (is 0x%X; expected 0x%X).\n", src_filesize,  end_of_file);
+	else if (src_filesize < end_of_file)
+		printf("Warning: Compressed file is smaller than expected (is 0x%X; expected 0x%X).\n", src_filesize,  end_of_file);
 
 	#if DEBUG
-	printf("Size of uncompressed data = 0x%X bytes\nSize of compressed data = 0x%X bytes\n", size_of_uncompressed_file, end_of_file+1);
+	printf("Size of uncompressed data = 0x%X bytes\nSize of compressed data = 0x%X bytes\n", size_of_uncompressed_file, end_of_file);
 	#endif
 
 	while (ftell(src_file) < end_of_file)
