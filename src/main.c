@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
 	if (argc <= 1)
 	{
 		printf("LZSS decompressor for Rocket Knight Adventures, made by Clownacy\n\nUsage: %s path_to_source path_to_destination\n", argv[0]);
-		getchar();
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,7 +31,6 @@ int main(int argc, char *argv[])
 	if (src_file == NULL)
 	{
 		printf("Error: File '%s' could not be opened.\n", argv[1]);
-		getchar();
 		exit(EXIT_FAILURE);
 	}
 
@@ -40,7 +38,6 @@ int main(int argc, char *argv[])
 	if (dst_file == NULL)
 	{
 		printf("Error: Could not open destination file.\n");
-		getchar();
 		exit(EXIT_FAILURE);
 	}
 
@@ -123,7 +120,6 @@ void writeByte(uint8_t value)
 	if (ftell(dst_file) >= size_of_uncompressed_file)
 	{
 		printf("Error: Decompressed file exceeded expected size. Input file might not be compressed.\n");
-		getchar();
 		exit(EXIT_FAILURE);
 	}
 
@@ -139,7 +135,6 @@ uint8_t readByte(void)
 	if (value == EOF)
 	{
 		printf("Error: Reached end-of-file prematurely. Input file appears to be incomplete.\n");
-		getchar();
 		exit(EXIT_FAILURE);
 	}
 
