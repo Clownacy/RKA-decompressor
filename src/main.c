@@ -87,6 +87,8 @@ int main(int argc, char *argv[])
 	fclose(src_file);
 	fclose(dst_file);
 
+	printf("Decompressed to '%s' successfully.\n", (argc >= 3 ? argv[2] : "decompressed.bin"));
+
 	return EXIT_SUCCESS;
 }
 
