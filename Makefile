@@ -1,6 +1,5 @@
 CC = gcc
-CFLAGS = -O3 -s -std=c11 -fno-ident
-NAME = RKA-decompressor.exe
+CFLAGS = -O3 -s -std=c99 -Wall -Wextra -pedantic
 
-all: src/main.c
-	$(CC) $(CFLAGS) -o $(NAME) $^
+RKA-decompressor: src/main.c
+	$(CC) $(CFLAGS) -o $@ $^

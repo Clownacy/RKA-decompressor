@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 		#endif
 		uint8_t description_field = readByte();
 
-		for (int i=0; (i < 8*sizeof(description_field)) && (ftell(src_file) < end_of_file); ++i)
+		for (unsigned long i=0; (i < 8*sizeof(description_field)) && (ftell(src_file) < end_of_file); ++i)
 		{
 			if ((description_field&(1<<i)) != 0)
 				doRawData();
@@ -82,9 +82,9 @@ int main(int argc, char *argv[])
 	}
 
 	if (ftell(dst_file) > size_of_uncompressed_file)
-		printf("Warning: Decompressed file is larger than expected (is 0x%X; expected 0x%X).\n", ftell(dst_file),  size_of_uncompressed_file);
+		printf("Warning: Decompressed file is larger than expected (is 0x%lX; expected 0x%X).\n", ftell(dst_file),  size_of_uncompressed_file);
 	else if (ftell(dst_file) < size_of_uncompressed_file)
-		printf("Warning: Decompressed file is smaller than expected (is 0x%X; expected 0x%X).\n", ftell(dst_file),  size_of_uncompressed_file);
+		printf("Warning: Decompressed file is smaller than expected (is 0x%lX; expected 0x%X).\n", ftell(dst_file),  size_of_uncompressed_file);
 
 	fclose(src_file);
 	fclose(dst_file);
